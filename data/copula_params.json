@@ -1,0 +1,15 @@
+{
+  "rho_global_onset": 0.054104238974942785,
+  "pd_onset": 0.02053838484546361,
+  "years": 11,
+  "rho_within_industry_onset": 0.12194676794373155,
+  "industry_year_cells": 146,
+  "rho_global_full_sample": 0.056183464479857816,
+  "note": "Binomial-Vasicek MLE (Gauss-Hermite, 40 nodes). Onset sample = firms not in Art.141 at t. rho_within_industry is the total within-industry correlation (rho_g); global factor share = rho_global.",
+  "US": {
+    "rho_global": 0.054903135835006105,
+    "pd": 0.007740016776391042,
+    "rho_within_division": 0.08466999932090355,
+    "cells": 165
+  }
+}

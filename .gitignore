@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+results/log*.txt
+results/run_status*.txt
+data/public/*.arff
+data/public/*_bankruptcy.csv
+data/public/std_*.csv
+data/public/std_*.csv.gz
+data/tse_prices/
