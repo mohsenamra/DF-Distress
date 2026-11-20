@@ -2,16 +2,19 @@
 
 Code and data for the paper
 
-> M. Amra, *When does decision-focused learning of supplier financial distress pay off? Evidence from risk-averse
-> supplier selection with simulated and realised outcomes*.
+> M. Amra, *Risk-averse supplier selection with predicted financial distress: validation on realised supplier
+> outcomes and the limits of decision-focused learning*.
 
-The paper studies supplier selection and order allocation under correlated supplier distress. Distress
-probabilities are plugged into a two-stage, risk-averse (mean-CVaR) sourcing model with backup capacity, correlated
-distress and stochastic severity. DF-Distress is a decision-focused correction of a cross-fitted, Platt-calibrated
-LightGBM model: a boosted correction is trained on the realised cost of the decisions it induces, with an antithetic
-score-function gradient and a cache of exact solutions evaluated in closed form. The repository contains the decision
-models, all learning methods and comparators, the experiments on 480 supplier pools from four markets, the
-robustness analyses and the evaluation on realised outcomes of Iranian suppliers.
+The paper develops and validates a data-driven procedure for sourcing under supplier financial risk. Distress
+probabilities learned from financial statements are plugged into a two-stage, risk-averse (mean-CVaR) supplier
+selection and order allocation model with backup capacity, correlated distress and stochastic severity, and the
+resulting decisions are evaluated on the realised delivery shortfalls of Iranian listed suppliers, measured from
+audited revenue and from production volumes in Codal monthly reports. The paper also tests whether training the
+predictor on decision cost helps: DF-Distress is a decision-focused correction of a cross-fitted, Platt-calibrated
+LightGBM model, trained on the realised cost of the decisions it induces with an antithetic score-function gradient
+and a cache of exact solutions evaluated in closed form. The repository contains the decision models, all learning
+methods and comparators, the experiments on 480 supplier pools from four markets, the robustness analyses and the
+evaluation on realised outcomes.
 
 ## Contents
 
@@ -40,7 +43,8 @@ tests/test_models.py      consistency checks of the decision models
 tools/                    browser script used to collect the Codal monthly reports
 data/                     Iranian panel, realised-outcome data and preparation scripts (see data/README.md)
 results/                  out-of-sample predictions and pool-level decision results of all methods
-figures/                  figures of the paper
+figures/                  figures of the paper (fig1-fig4: Figs. 1-4 of the main text; fig5-fig8: Figs. F.1-F.4 of
+                          the Supplementary Material)
 ```
 
 ## Installation
@@ -84,7 +88,10 @@ python -m pytest tests
 
 ## Main results
 
-Mean normalised regret (%) over 480 test pools (Iran 140, US 140, Poland 100, Taiwan 100):
+On realised supplier outcomes (Iran, 97 pools), calibrated distress probabilities plugged into the two-stage model
+reduce regret by about 36% relative to the risk-blind rule, whereas the decision-focused correction adds no further
+value. Within the decision model, mean normalised regret (%) over 480 test pools (Iran 140, US 140, Poland 100,
+Taiwan 100) is:
 
 | Method | Regret | Reduction by DF-Distress [95% interval] |
 |---|---|---|
@@ -95,9 +102,7 @@ Mean normalised regret (%) over 480 test pools (Iran 140, US 140, Poland 100, Ta
 | SPO+-warm | 1.197 | 7.0 [-4.9, 17.6] |
 | Risk-blind rule | 2.581 | 56.9 [51.1, 62.9] |
 
-Intervals come from a fold-cluster bootstrap stratified by dataset. On realised supplier outcomes (Iran, 97 pools),
-calibrated probabilities plugged into the two-stage model reduce regret by about 36% relative to the risk-blind rule,
-while the decision-focused correction adds no further value.
+Intervals come from a fold-cluster bootstrap stratified by dataset.
 
 ## License
 
